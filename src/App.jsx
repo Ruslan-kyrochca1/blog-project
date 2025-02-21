@@ -11,7 +11,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [posts, setPosts] = useState([]);
-
   useEffect(() => {
     const storedPosts = JSON.parse(localStorage.getItem("newPost")) || [];
     
@@ -21,6 +20,13 @@ function App() {
       .catch((error) => console.error("Ошибка:", error));
   }, []);
 
+  const deletePost = (id) =>{ 
+    setPosts(prev => {
+      const updatedPosts = prev.filter((post) => post.id !== id);
+      localStorage.setItem("newPost", JSON.stringify(updatedPosts));
+      return updatedPosts;
+    });
+  }
 
   const addPost = (newPost) => {
     const updatedPosts = [newPost, ...posts];
@@ -28,12 +34,22 @@ function App() {
     localStorage.setItem("newPost", JSON.stringify(updatedPosts));
   };
 
+  const updatePosts = (updatedPost) => {
+    setPosts(prev => {
+      const updatedPosts = prev.map((post) => 
+        post.id === updatedPost.id ? updatedPost : post
+      );
+      localStorage.setItem("newPost", JSON.stringify(updatedPosts));
+      return updatedPosts;
+    });
+  }
+
   return (
     <>
       <Header />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/post/:id" element={<PostPage posts={posts} />} />
+        <Route path="/post/:id" element={<PostPage posts={posts} deletePost={deletePost} updatePosts = {updatePosts} />} />
         <Route
           path="/create"
           element={

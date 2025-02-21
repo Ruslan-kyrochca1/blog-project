@@ -1,0 +1,37 @@
+.post-card{
+    display: block;
+    margin-top: $spacing-medium;
+    padding: $spacing-large;
+    background-color: $secondary-color;
+    border-radius: 15px;
+    box-shadow: 4px 4px 2px 1px darken($primary-color, 20%);
+    &:hover{
+        transform: scale(1.01);
+        box-shadow: 8px 8px 2px 1px $primary-color;
+    }
+    .cart-title{
+        text-align: center;
+    }
+    .cart-descr{
+        margin: $spacing-large 0;
+    }
+    .submit-button{
+        display: block;
+        padding: 20px;
+        margin: 0 auto;
+        margin-top: $spacing-large;
+    }
+    .buttons-container{
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+  
+.post-card {
+    animation: fadeIn 0.5s ease-in-out;
+}

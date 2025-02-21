@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CreatePost({ addPost }) {
     const navigate = useNavigate()
-    const [username, setUsername] = useState("")
+    const [tags, setTags] = useState("")
     const [text, setText] = useState("")
     const [title, setTitle] = useState("")
 
@@ -17,7 +17,7 @@ function CreatePost({ addPost }) {
             id: Date.now(),
             title,
             body: text,
-            tags: [],
+            tags: [...(tags.trim().split('#').filter((elem) => elem.length !== 0))],
             userId: 5,
         }
         
@@ -28,24 +28,29 @@ function CreatePost({ addPost }) {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
-        <input 
-            type="text" 
-            placeholder="Ваше имя"
-            value = {username}
-            onChange={(e)=> setUsername(e.target.value)}
-        />
+    <form onSubmit={handleSubmit} className="form-container">
         <textarea 
             name="text" 
+            className="textarea-field"
+            placeholder="Заголовок"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
         />
         <textarea 
-            name="text" 
+            name="text"
+            className="textarea-field"
+            placeholder="Основной текст поста"
             value={text}
             onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Отправить</button>
+        <input 
+            type="text" 
+            className="input-field"
+            placeholder="Введите теги через #"
+            value = {tags}
+            onChange={(e)=> setTags(e.target.value)}
+        />
+        <button type="submit" className="submit-button">Отправить</button>
     </form>
   )
 }

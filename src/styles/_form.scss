@@ -1,0 +1,52 @@
+.form-container{
+    max-width: 500px;
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    margin: $spacing-large auto;
+    padding: $spacing-large;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field, .textarea-field {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: 2px solid #ddd;
+    box-shadow: none;
+    &:focus{
+        border-color: $primary-color;
+        box-shadow: 0px 1px 15px rgba($primary-color, 0.5);
+        outline: none;
+    }
+}
+
+.textarea-field {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-button {
+    padding: 12px 16px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background: $primary-color;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      background: darken($primary-color, 10%);
+      transform: scale(1.02);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+.form-container {
+    animation: fadeIn 0.5s ease-in-out;
+}

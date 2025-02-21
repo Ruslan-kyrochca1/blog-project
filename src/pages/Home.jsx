@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function Home({ posts }) {
   return (
     <main className='posts-list'>
-        {posts.map(post => (
-            <div className="post-card" key={post.id}>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
-                <Link to={`/post/${post.id}`}>Читать дальше...</Link>
-            </div>
+        {posts.map((post, index) => (
+            <NavLink to={`/post/${post.id}`} className="post-card" key={`post-${index}`}> 
+            {/* Не использую id, который дан в API, так как он не уникальный */}
+              <h2 className="cart-title">{post.title}</h2>
+              <p className="cart-descr">{post.body}</p>
+            </NavLink>
         ))
         }
     </main>

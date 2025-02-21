@@ -35,20 +35,22 @@ function Login() {
   
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="form-container">
       <input
         type="text"
+        className="input-field"
         placeholder="Логин"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
+        className="input-field"
         placeholder="Пароль"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Войти</button>
+      <button type="submit" className="submit-button">Войти</button>
     </form>
   );
 }
