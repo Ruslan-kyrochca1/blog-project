@@ -9,7 +9,11 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
   
-    console.log("Отправляем:", { email, password });
+    if(email.length === 0 || password.length === 0) {
+      alert("Поля ввода не должны быть пустыми")
+      return
+    }
+    
     // {
     //     "email": "eve.holt@reqres.in",
     //     "password": "cityslicka"
@@ -40,6 +44,7 @@ function Login() {
         type="text"
         className="input-field"
         placeholder="Логин"
+        maxlength="30"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -47,6 +52,7 @@ function Login() {
         type="password"
         className="input-field"
         placeholder="Пароль"
+        maxlength="50"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />

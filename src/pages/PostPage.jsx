@@ -27,6 +27,10 @@ function PostPage({posts, deletePost, updatePosts}) {
   }, [post]);
 
   const handleSave = () =>{
+    if(editTitle.length === 0 || editBody.length === 0 ){
+      alert("Поля заголовка и основного текста не должны быть пустыми")
+      return
+    }
     const updatedPosts = {...post, title: editTitle, body: editBody, tags: [...(editTags.trim().split('#').filter((elem) => elem.length !== 0))]};
     updatePosts(updatedPosts)
     setIsEditing(false)
@@ -40,9 +44,9 @@ function PostPage({posts, deletePost, updatePosts}) {
     <div className="post-card">
       {isEditing?(
       <>
-      <textarea name="text" className="textarea-field" value={editTitle} onChange={(e) => setEditTitle(e.target.value)}></textarea>
-      <textarea name="text" className="textarea-field" value={editBody} onChange={(e) => setEditBody(e.target.value)}></textarea>
-      <input type="text" className="input-field" value={editTags} onChange={(e) => setEditTags(e.target.value)}/>
+      <textarea name="text" className="textarea-field" maxLength="300" value={editTitle} onChange={(e) => setEditTitle(e.target.value)}></textarea>
+      <textarea name="text" className="textarea-field" maxLength="1000" value={editBody} onChange={(e) => setEditBody(e.target.value)}></textarea>
+      <input type="text" className="input-field" maxLength="100" value={editTags} onChange={(e) => setEditTags(e.target.value)}/>
       <button className="submit-button" onClick={handleSave}>Сохранить изменения</button>
       </>):(
       <>

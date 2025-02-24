@@ -6,6 +6,8 @@ function Header() {
     return localStorage.getItem("theme") !== "dark"
   })
 
+  const[menuOpen, setMenuOpen] = useState(false)
+
   const navigate = useNavigate()
   const checkLogin = () =>{
       localStorage.getItem("token")? localStorage.removeItem("token"): "";
@@ -24,10 +26,15 @@ function Header() {
     },[])
   return (
     <header>
-      <nav>
+      <button className={`burger-menu ${menuOpen ? "button-close" : "" }`} onClick={()=>{setMenuOpen(prev => !prev)}}>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+      </button>
+      <nav className={menuOpen ? "nav open" : "nav"}>
         <button onClick={checkLogin} className="button">Войти/Выйти</button>
-        <NavLink to={"/"} className="button secondary">Главная</NavLink>
-        <NavLink to={"/create"} className="button secondary">Создать пост</NavLink>
+        <NavLink to={"/"} className="button secondary" onClick={() => setMenuOpen(false)}>Главная</NavLink>
+        <NavLink to={"/create"} className="button secondary" onClick={() => setMenuOpen(false)}>Создать пост</NavLink>
         <button onClick={changeTheme} className={theme ? "theme theme-light" : "theme theme-dark"}>
           <div className="object"></div> 
           <div className="could"></div>

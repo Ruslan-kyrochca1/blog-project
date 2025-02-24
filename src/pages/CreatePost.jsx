@@ -12,6 +12,10 @@ function CreatePost({ addPost }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         
+        if(title.length === 0 || text.length === 0) {
+            alert("Поля заголовка и основного текста не должны быть пустыми")
+            return
+        }
         
         const newPost = {
             id: Date.now(),
@@ -33,6 +37,7 @@ function CreatePost({ addPost }) {
             name="text" 
             className="textarea-field"
             placeholder="Заголовок"
+            maxLength="300"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
         />
@@ -41,6 +46,7 @@ function CreatePost({ addPost }) {
             className="textarea-field"
             placeholder="Основной текст поста"
             value={text}
+            maxLength="1000"
             onChange={(e) => setText(e.target.value)}
         />
         <input 
@@ -49,6 +55,7 @@ function CreatePost({ addPost }) {
             placeholder="Введите теги через #"
             value = {tags}
             onChange={(e)=> setTags(e.target.value)}
+            maxLength="100"
         />
         <button type="submit" className="submit-button">Отправить</button>
     </form>
